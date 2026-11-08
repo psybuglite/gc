@@ -12,6 +12,12 @@ export type ApplicationData = {
   street: string
   city: string
   state: string
+  tourWord: string
+  languages: string[]
+  experience: '' | 'professional' | 'informal' | 'new'
+  years: string
+  tourStory: string
+  hourlyRate: number
 }
 
 const EMPTY: ApplicationData = {
@@ -25,6 +31,12 @@ const EMPTY: ApplicationData = {
   street: '',
   city: '',
   state: '',
+  tourWord: '',
+  languages: ['English'],
+  experience: '',
+  years: '',
+  tourStory: '',
+  hourlyRate: 25,
 }
 const STORAGE_KEY = 'gc.guideApplication.v1'
 
