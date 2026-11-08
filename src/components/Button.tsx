@@ -14,7 +14,7 @@ const variants = {
 
 const sizes = {
   large: 'px-7 py-3.5 text-base',
-  small: 'px-5 py-2 text-sm',
+  small: 'px-4 py-2 text-sm',
 } as const
 
 /** UI/Button — pill button. Disabled state is shown when `disabled` is set. */
