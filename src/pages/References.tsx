@@ -16,7 +16,7 @@ function RelationshipSelect({ value, error, onChange }: { value: string; error?:
     <Field label="Relationship" required htmlFor={id} error={error} className="md:min-w-px md:flex-1">
       <div className={`relative ${controlShell}`}>
         <div className={controlBox(error)}>
-          <span className={`min-w-px flex-1 text-sm leading-[18px] font-medium ${value ? 'text-text-primary' : 'text-[#3d3d3d] opacity-50'}`}>{value || 'Select relationship'}</span>
+          <span className={`min-w-px flex-1 text-sm font-medium ${value ? 'text-text-primary' : 'text-[#3d3d3d] opacity-50'}`}>{value || 'Select relationship'}</span>
           <ChevronDownIcon className="size-6 text-text-primary opacity-80" />
         </div>
         <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="absolute inset-0 size-full cursor-pointer opacity-0">
@@ -70,8 +70,8 @@ export default function References() {
       {data.references.map((r, i) => (
         <section key={i} className="flex w-full flex-col gap-3" aria-label={`Reference ${i + 1}`}>
           <div className="flex items-center gap-3">
-            <span className="flex size-9 items-center justify-center rounded-full bg-brand-subtle text-sm leading-[18px] font-semibold text-brand-text">{i + 1}</span>
-            <h2 className="m-0 text-base leading-[18px] font-semibold text-text-primary">Reference {i + 1}</h2>
+            <span className="flex size-9 items-center justify-center rounded-full bg-brand-subtle text-sm font-semibold text-brand-text">{i + 1}</span>
+            <h2 className="m-0 text-base font-semibold text-text-primary">Reference {i + 1}</h2>
           </div>
           <div className="flex w-full flex-col gap-4 md:flex-row">
             <TextField
@@ -100,7 +100,7 @@ export default function References() {
       ))}
       <div className="flex w-full items-start gap-2 text-text-tertiary">
         <MailIcon className="mt-px size-4 shrink-0" />
-        <p className="m-0 min-w-px flex-1 text-sm leading-[18px]">We’ll email them after you submit. It takes about 2 minutes.</p>
+        <p className="m-0 min-w-px flex-1 text-sm">We’ll email them after you submit. It takes about 2 minutes.</p>
       </div>
     </WizardLayout>
   )

@@ -54,7 +54,7 @@ export default function IdVerification() {
       <Field label="Which ID will you use?" required htmlFor={typeId} className="w-full">
         <div className={`relative ${controlShell}`}>
           <div className={controlBox()}>
-            <span className="min-w-px flex-1 text-sm leading-[18px] font-medium text-text-primary">{typeLabel}</span>
+            <span className="min-w-px flex-1 text-sm font-medium text-text-primary">{typeLabel}</span>
             <ChevronDownIcon className="size-6 text-text-secondary opacity-80" />
           </div>
           <select
@@ -110,7 +110,7 @@ export default function IdVerification() {
 
       <div className="flex w-full items-start gap-2 text-text-tertiary">
         <LockIcon className="mt-px size-4 shrink-0" />
-        <p className="m-0 min-w-px flex-1 text-sm leading-[18px]">Encrypted, stored securely and never shown to travellers</p>
+        <p className="m-0 min-w-px flex-1 text-sm">Encrypted, stored securely and never shown to travellers</p>
       </div>
     </WizardLayout>
   )

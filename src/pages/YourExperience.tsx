@@ -51,7 +51,7 @@ export default function YourExperience() {
       <Field label="Years of experience" required htmlFor={yearsId} error={submitted ? errors.years : ''} className="w-full">
         <div className={`relative ${controlShell}`}>
           <div className={controlBox(submitted ? errors.years : '')}>
-            <span className={`min-w-px flex-1 text-sm leading-[18px] font-medium text-text-primary ${data.years ? '' : 'opacity-50'}`}>
+            <span className={`min-w-px flex-1 text-sm font-medium text-text-primary ${data.years ? '' : 'opacity-50'}`}>
               {data.years || '3–5 years'}
             </span>
           </div>

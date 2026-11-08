@@ -44,7 +44,7 @@ export function DateField({ label, required, value, hint, error, className, onCh
             placeholder="DD / MM / YYYY"
             value={value}
             onChange={(e) => onChange(formatDate(e.target.value))}
-            className="min-w-px flex-1 bg-transparent text-sm leading-[18px] font-medium text-text-primary outline-none placeholder:text-[#3d3d3d]/50"
+            className="min-w-px flex-1 bg-transparent text-sm font-medium text-text-primary outline-none placeholder:text-[#3d3d3d]/50"
           />
           <button
             type="button"

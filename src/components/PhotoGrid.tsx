@@ -69,7 +69,7 @@ export function PhotoGrid({ photos, max = 6, onAdd, onRemove }: PhotoGridProps) 
         {cover && cover.progress === 100 ? (
           <div className="relative h-[170px] overflow-hidden rounded-2xl p-3 md:h-[200px]">
             <img src={cover.url} alt={cover.name} className="absolute inset-0 size-full object-cover" />
-            <span className="relative rounded-full bg-bg-surface px-2.5 py-1 text-xs leading-4 font-semibold text-text-primary">Cover photo</span>
+            <span className="relative rounded-full bg-bg-surface px-2.5 py-1 text-xs leading-[18px] font-semibold text-text-primary">Cover photo</span>
             <RemoveButton name={cover.name} onClick={() => onRemove(cover.id)} />
           </div>
         ) : cover ? (

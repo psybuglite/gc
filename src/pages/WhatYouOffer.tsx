@@ -56,15 +56,15 @@ export default function WhatYouOffer() {
 
       <section className="flex w-full flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <h2 className="m-0 text-lg leading-5 font-semibold text-text-primary">Languages you speak</h2>
-          <p className="m-0 text-sm leading-[18px] text-text-tertiary">Add every language you can guide in. Travellers often search by language.</p>
+          <h2 className="m-0 text-lg leading-[26px] font-semibold text-text-primary">Languages you speak</h2>
+          <p className="m-0 text-sm text-text-tertiary">Add every language you can guide in. Travellers often search by language.</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {data.languages.map((l) => (
             <RemovableChip key={l} label={l} onRemove={() => update({ languages: data.languages.filter((x) => x !== l) })} />
           ))}
           {available.length > 0 && (
-            <label className="relative flex cursor-pointer items-center rounded-full border border-border-subtle bg-bg-surface px-3 py-1.5 text-sm leading-[18px] font-medium text-text-secondary">
+            <label className="relative flex cursor-pointer items-center rounded-full border border-border-subtle bg-bg-surface px-3 py-1.5 text-sm font-medium text-text-secondary">
               + Add language
               <select
                 aria-label="Add language"

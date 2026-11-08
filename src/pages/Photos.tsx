@@ -54,7 +54,7 @@ export default function Photos() {
       <PhotoGrid photos={photos} onAdd={add} onRemove={remove} />
       <div className="flex w-full items-start gap-2 text-text-tertiary">
         <InfoCircleIcon className="mt-px size-4 shrink-0" />
-        <p className={`m-0 min-w-px flex-1 text-sm leading-[18px] ${submitted && ready < REQUIRED ? 'text-danger' : ''}`}>
+        <p className={`m-0 min-w-px flex-1 text-sm ${submitted && ready < REQUIRED ? 'text-danger' : ''}`}>
           {ready < REQUIRED ? `${ready} of ${REQUIRED} required` : `${ready} photos added`} · JPG or PNG, up to 10 MB each · drag to reorder
         </p>
       </div>

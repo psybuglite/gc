@@ -12,12 +12,12 @@ type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & 
 /** Input field: label with required marker, 14px/16px padded box, optional hint and error. */
 export function TextField({ label, required, error, hint, multiline, onChange, className = '', ...rest }: TextFieldProps) {
   const id = useId()
-  const box = `w-full rounded-[8px] border bg-white px-[15px] py-[16px] text-sm leading-[18px] font-medium text-[#3d3d3d] placeholder:text-[#3d3d3d]/50 outline-none ${
+  const box = `w-full rounded-[8px] border bg-white px-[15px] text-sm font-medium text-[#3d3d3d] placeholder:text-[#3d3d3d]/50 outline-none ${
     error ? 'border-danger' : 'border-[#b0b0b0]'
   }`
   return (
     <div className={`flex w-full flex-col gap-1 ${className}`}>
-      <label htmlFor={id} className="flex gap-1 text-sm leading-[18px] font-medium text-text-primary">
+      <label htmlFor={id} className="flex gap-1 text-sm font-medium text-text-primary">
         {label}
         {required && <span className="text-danger" aria-hidden="true">*</span>}
       </label>
@@ -28,13 +28,13 @@ export function TextField({ label, required, error, hint, multiline, onChange, c
             id={id}
             rows={1}
             aria-invalid={!!error}
-            className={`${box} block resize-none [field-sizing:content]`}
+            className={`${box} block min-h-[52px] resize-none py-[15px] [field-sizing:content]`}
             onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
             onChange={(e) => onChange(e.target.value.replace(/\n/g, ' '))}
             {...(rest as object)}
           />
         ) : (
-          <input id={id} aria-invalid={!!error} className={box} onChange={(e) => onChange(e.target.value)} {...rest} />
+          <input id={id} aria-invalid={!!error} className={`${box} h-[52px]`} onChange={(e) => onChange(e.target.value)} {...rest} />
         )}
       </div>
       {error ? (

@@ -21,7 +21,7 @@ export function CountrySelect({ label, required, value, error, className, onChan
       <div className={`relative ${controlShell}`}>
         <div className={controlBox(error)}>
           <span className="text-xl leading-none">{flagEmoji(country.code)}</span>
-          <span className="min-w-px flex-1 text-sm leading-[18px] font-medium text-text-primary">{country.name}</span>
+          <span className="min-w-px flex-1 text-sm font-medium text-text-primary">{country.name}</span>
           <ChevronDownIcon className="size-6 text-text-primary" />
         </div>
         <select

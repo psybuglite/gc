@@ -30,7 +30,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`flex cursor-pointer items-center justify-center gap-2 rounded-full leading-[18px] font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary disabled:cursor-not-allowed disabled:bg-bg-surface-muted disabled:text-text-tertiary disabled:border-transparent ${variants[variant]} ${sizes[size]} ${fullWidth ? 'w-full' : ''} ${className}`}
+      className={`flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary disabled:cursor-not-allowed disabled:bg-bg-surface-muted disabled:text-text-tertiary disabled:border-transparent ${variants[variant]} ${sizes[size]} ${fullWidth ? 'w-full' : ''} ${className}`}
       {...rest}
     >
       {children}

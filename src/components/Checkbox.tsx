@@ -19,7 +19,7 @@ export function Checkbox({ checked, onChange, children }: CheckboxProps) {
       >
         {checked && <CheckIcon className="size-3.5" />}
       </span>
-      <span className="min-w-px flex-1 text-sm leading-[18px] font-medium text-text-primary">{children}</span>
+      <span className="min-w-px flex-1 text-sm font-medium text-text-primary">{children}</span>
     </label>
   )
 }

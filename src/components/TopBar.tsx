@@ -21,7 +21,7 @@ export function TopBar({ onHelp, onSaveExit }: TopBarProps) {
         className="flex size-9 cursor-pointer items-center justify-center rounded-full bg-bg-surface-muted text-text-primary md:size-auto md:rounded-none md:bg-transparent md:px-1 md:py-2"
       >
         <HelpIcon className="size-[18px] md:hidden" />
-        <span className="hidden text-sm leading-[18px] font-semibold md:inline">Questions?</span>
+        <span className="hidden text-sm font-semibold md:inline">Questions?</span>
       </button>
       {onSaveExit && (
         <Button variant="outline" size="small" onClick={onSaveExit}>

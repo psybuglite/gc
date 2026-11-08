@@ -17,9 +17,9 @@ export function OptionCard({ title, description, selected, onSelect }: OptionCar
         selected ? 'border-2 border-brand-primary bg-brand-subtle' : 'border border-border-subtle bg-bg-surface'
       }`}
     >
-      <span className="flex min-w-px flex-1 flex-col gap-1 leading-[18px]">
-        <span className="text-base leading-[18px] font-semibold text-text-primary">{title}</span>
-        <span className="text-sm leading-[18px] text-text-secondary">{description}</span>
+      <span className="flex min-w-px flex-1 flex-col gap-1">
+        <span className="text-base font-semibold text-text-primary">{title}</span>
+        <span className="text-sm text-text-secondary">{description}</span>
       </span>
       {selected ? (
         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" className="shrink-0">

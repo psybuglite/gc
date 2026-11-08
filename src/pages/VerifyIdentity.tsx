@@ -57,7 +57,7 @@ export default function VerifyIdentity() {
         <div className="flex w-full flex-col gap-2">
           <UploadBox title={file ? file.name : selected.uploadTitle} onFileSelected={handleFile} />
           {error && (
-            <p role="alert" className="m-0 text-sm leading-[18px] text-brand-text">
+            <p role="alert" className="m-0 text-sm text-brand-text">
               {error}
             </p>
           )}
@@ -65,7 +65,7 @@ export default function VerifyIdentity() {
 
         <div className="flex w-full items-start gap-2.5 overflow-clip rounded-xl bg-info-bg px-3.5 py-3 text-info-text">
           <ShieldTickIcon className="size-[18px] shrink-0" />
-          <p className="m-0 min-w-px flex-1 text-sm leading-[18px]">
+          <p className="m-0 min-w-px flex-1 text-sm">
             We check your ID with our verification partner and only show guides a “Verified” badge.
           </p>
         </div>

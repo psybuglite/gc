@@ -20,7 +20,7 @@ export function UploadBox({ title, hint = 'JPG, PNG or PDF · max 10 MB', classN
         <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-bg-surface text-text-primary">
           <UploadCloudIcon className="size-6" />
         </span>
-        <span className="flex min-w-px flex-1 flex-col gap-0.5 text-left leading-[18px]">
+        <span className="flex min-w-px flex-1 flex-col gap-0.5 text-left">
           <span className="text-sm font-semibold text-brand-text">{title}</span>
           <span className="text-xs text-text-tertiary">{hint}</span>
         </span>

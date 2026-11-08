@@ -10,7 +10,7 @@ import { useApplication } from '../state/application'
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="flex w-full flex-col gap-2">
-      <h2 className="m-0 text-lg leading-5 font-semibold text-text-primary">{title}</h2>
+      <h2 className="m-0 text-lg leading-[26px] font-semibold text-text-primary">{title}</h2>
       {children}
     </section>
   )

@@ -52,14 +52,14 @@ export default function HourlyRate() {
             <PlusIcon />
           </StepButton>
         </div>
-        <p className="m-0 text-base leading-[18px] font-medium text-text-secondary">per hour</p>
+        <p className="m-0 text-base font-medium text-text-secondary">per hour</p>
         <div className="flex items-center gap-1.5 rounded-full bg-bg-surface px-3 py-1.5 text-xs leading-[18px] font-medium whitespace-nowrap text-text-secondary">
           <InfoIcon className="size-3.5 text-text-tertiary" />
           Most Lagos guides charge $20–$40
         </div>
       </div>
 
-      <dl className="m-0 flex w-full flex-col gap-3 text-sm leading-[18px]">
+      <dl className="m-0 flex w-full flex-col gap-3 text-sm">
         <div className="flex justify-between">
           <dt className="text-text-secondary">Your rate</dt>
           <dd className="m-0 font-medium text-text-primary">{usd(rate)}</dd>

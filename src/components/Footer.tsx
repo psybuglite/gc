@@ -17,7 +17,7 @@ type FooterProps = {
 export function Footer({ step, totalSteps = 6, quarters = 2, label, onBack, onNext, nextLabel = 'Next', nextDisabled }: FooterProps) {
   const text = `Step ${step} of ${totalSteps} · ${label}`
   return (
-    <footer className="w-full bg-bg-surface">
+    <footer className="sticky bottom-0 z-10 w-full bg-bg-surface">
       <div className="flex items-start gap-1 px-4 pt-3 md:px-20 md:pt-4" role="progressbar" aria-label={text} aria-valuemin={0} aria-valuemax={totalSteps * 4} aria-valuenow={(step - 1) * 4 + quarters}>
         {Array.from({ length: totalSteps }, (_, i) => {
           const filled = i + 1 < step ? 4 : i + 1 === step ? quarters : 0
@@ -30,12 +30,12 @@ export function Footer({ step, totalSteps = 6, quarters = 2, label, onBack, onNe
           )
         })}
       </div>
-      <p className="m-0 px-4 pt-2 text-sm leading-[18px] font-medium text-text-secondary md:hidden">{text}</p>
-      <div className="flex items-center justify-between px-4 pt-2 pb-[34px] md:px-20 md:py-4">
-        <button type="button" onClick={onBack} className="cursor-pointer px-1 py-3.5 text-base leading-[18px] font-semibold text-text-primary">
+      <p className="m-0 px-4 pt-2 text-sm font-medium text-text-secondary md:hidden">{text}</p>
+      <div className="flex items-center justify-between px-4 pt-2 pb-[max(34px,env(safe-area-inset-bottom))] md:px-20 md:py-4">
+        <button type="button" onClick={onBack} className="cursor-pointer px-1 py-3.5 text-base font-semibold text-text-primary">
           Back
         </button>
-        <p className="m-0 hidden text-sm leading-[18px] font-medium text-text-secondary md:block">{text}</p>
+        <p className="m-0 hidden text-sm font-medium text-text-secondary md:block">{text}</p>
         <Button onClick={onNext} disabled={nextDisabled}>
           {nextLabel}
         </Button>

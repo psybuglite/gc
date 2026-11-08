@@ -8,7 +8,7 @@ type RemovableChipProps = {
 /** UI/Removable Chip — selected tag with an inline remove button. */
 export function RemovableChip({ label, onRemove }: RemovableChipProps) {
   return (
-    <span className="flex items-center gap-1.5 rounded-full border border-brand-primary bg-brand-subtle py-2 pr-2 pl-3.5 text-sm leading-[18px] font-medium whitespace-nowrap text-brand-text">
+    <span className="flex items-center gap-1.5 rounded-full border border-brand-primary bg-brand-subtle py-2 pr-2 pl-3.5 text-sm font-medium whitespace-nowrap text-brand-text">
       {label}
       <button
         type="button"

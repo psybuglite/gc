@@ -16,10 +16,10 @@ function ReviewRow({ title, summary, details = [], editTo }: RowProps) {
     <div className="border-b border-border-subtle py-2.5">
       <div className="flex items-center gap-3">
         <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-w-px flex-1 cursor-pointer flex-col items-start gap-0.5 text-left">
-          <span className="text-sm leading-[18px] font-semibold text-text-tertiary">{title}</span>
-          <span className="text-base leading-[18px] font-medium text-text-primary">{summary}</span>
+          <span className="text-sm font-semibold text-text-tertiary">{title}</span>
+          <span className="text-base font-medium text-text-primary">{summary}</span>
         </button>
-        <button type="button" onClick={() => navigate(editTo)} className="cursor-pointer px-1 py-2 text-sm leading-[18px] font-semibold text-text-primary">
+        <button type="button" onClick={() => navigate(editTo)} className="cursor-pointer px-1 py-2 text-sm font-semibold text-text-primary">
           Edit
         </button>
         <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? 'Collapse' : 'Expand'} className="flex size-5 cursor-pointer items-center justify-center text-text-secondary">
@@ -29,7 +29,7 @@ function ReviewRow({ title, summary, details = [], editTo }: RowProps) {
       {open && details.length > 0 && (
         <ul className="m-0 mt-2 flex list-none flex-col gap-1 p-0">
           {details.map((d) => (
-            <li key={d} className="text-sm leading-[18px] text-text-secondary">
+            <li key={d} className="text-sm text-text-secondary">
               {d}
             </li>
           ))}
@@ -99,7 +99,7 @@ export default function ReviewSubmit() {
       </div>
 
       <div className="flex w-full flex-col gap-2 rounded-2xl bg-bg-surface-muted px-6 py-4">
-        <h2 className="m-0 text-lg leading-5 font-semibold text-text-primary">Before you submit</h2>
+        <h2 className="m-0 text-lg leading-[26px] font-semibold text-text-primary">Before you submit</h2>
         {AGREEMENTS.map((text, i) => (
           <Checkbox key={text} checked={agreed[i]} onChange={(v) => setAgreed((a) => a.map((x, j) => (j === i ? v : x)))}>
             {text}

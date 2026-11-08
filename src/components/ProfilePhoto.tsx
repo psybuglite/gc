@@ -24,8 +24,8 @@ export function ProfilePhoto({ onChange }: ProfilePhotoProps) {
         {preview ? <img src={preview} alt="" className="size-full object-cover" /> : <CameraPlusIcon className="size-7" />}
       </button>
       <div className="flex min-w-px flex-1 flex-col items-start gap-1">
-        <p className="m-0 text-base leading-[18px] font-semibold text-text-primary">Add a profile photo</p>
-        <p className="m-0 text-sm leading-[18px] text-text-secondary">A clear, smiling photo of your face works best.</p>
+        <p className="m-0 text-base font-semibold text-text-primary">Add a profile photo</p>
+        <p className="m-0 text-sm text-text-secondary">A clear, smiling photo of your face works best.</p>
         <Button variant="outline" size="small" className="mt-1" onClick={() => inputRef.current?.click()}>
           {preview ? 'Change photo' : 'Upload photo'}
         </Button>

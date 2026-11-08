@@ -30,8 +30,8 @@ export default function Introduction() {
           <img src={photo1} alt="" className="h-[220px] w-full rounded-3xl object-cover md:hidden" />
 
           <div className="flex flex-col gap-2 md:gap-3">
-            <p className="m-0 text-sm leading-[18px] font-semibold text-brand-text md:hidden">Become a guide</p>
-            <h1 className="m-0 text-2xl leading-8 font-semibold text-text-primary md:text-[40px] md:leading-[48px] md:tracking-[-0.6px]">
+            <p className="m-0 text-sm font-semibold text-brand-text md:hidden">Become a guide</p>
+            <h1 className="m-0 text-2xl leading-8 font-semibold text-text-primary md:text-[40px] md:leading-[52px] md:tracking-[-0.6px]">
               Turn your love for Lagos into income
             </h1>
             <p className="m-0 text-base leading-6 text-text-secondary">
@@ -41,20 +41,20 @@ export default function Introduction() {
           </div>
 
           <div className="flex flex-col gap-3 md:gap-3.5">
-            <p className="m-0 text-sm leading-[18px] font-semibold text-text-tertiary">What you’ll need · about 10 minutes</p>
+            <p className="m-0 text-sm font-semibold text-text-tertiary">What you’ll need · about 10 minutes</p>
             {NEEDS.map((item) => (
               <div key={item} className="flex items-center gap-3">
                 <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-success-bg text-success-text">
                   <CheckIcon className="size-3.5" />
                 </span>
-                <span className="text-sm leading-[18px] font-medium text-text-primary md:text-base">{item}</span>
+                <span className="text-sm font-medium text-text-primary md:text-base">{item}</span>
               </div>
             ))}
           </div>
 
           <div className="hidden items-center gap-4 md:flex">
             <Button onClick={start}>Get started</Button>
-            <span className="text-sm leading-[18px] text-text-tertiary">Your progress saves as you go</span>
+            <span className="text-sm text-text-tertiary">Your progress saves as you go</span>
           </div>
         </div>
 
