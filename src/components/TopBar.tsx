@@ -14,7 +14,7 @@ type TopBarProps = {
 export function TopBar({ onHelp, onSaveExit }: TopBarProps) {
   const [help, setHelp] = useState(false)
   return (
-    <header className="flex w-full items-center justify-between bg-bg-surface px-4 py-3 md:px-[70px] md:py-6">
+    <header className="sticky top-0 z-20 flex w-full items-center justify-between bg-bg-surface px-4 py-3 md:px-[70px] md:py-6">
       <img src={logoMark} alt="guideConnect" width={36} height={36} className="size-9" />
       <div className="flex items-center gap-2 md:gap-5">
       <button
