@@ -1,4 +1,5 @@
 import { useId, type InputHTMLAttributes } from 'react'
+import { controlShell } from './Field'
 
 type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   label: string
@@ -13,7 +14,7 @@ type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & 
 export function TextField({ label, required, error, hint, multiline, onChange, className = '', ...rest }: TextFieldProps) {
   const id = useId()
   const box = `w-full rounded-[8px] border bg-white px-[15px] text-sm font-medium text-[#3d3d3d] placeholder:text-[#3d3d3d]/50 outline-none ${
-    error ? 'border-danger' : 'border-[#b0b0b0]'
+    error ? 'border-danger-border' : 'border-[#b0b0b0]'
   }`
   return (
     <div className={`flex w-full flex-col gap-1 ${className}`}>
@@ -22,7 +23,7 @@ export function TextField({ label, required, error, hint, multiline, onChange, c
         {required && <span className="text-danger" aria-hidden="true">*</span>}
       </label>
       {/* 54px field: 52px visible box inset 1px; the wrapper's outline is the focus ring */}
-      <div className="rounded-[9px] p-px focus-within:outline-2 focus-within:outline-brand-border">
+      <div className={controlShell(error)}>
         {multiline ? (
           <textarea
             id={id}
@@ -38,7 +39,7 @@ export function TextField({ label, required, error, hint, multiline, onChange, c
         )}
       </div>
       {error ? (
-        <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+        <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
           {error}
         </p>
       ) : (

@@ -67,6 +67,7 @@ export default function PrivateDetails() {
             label="Date of birth"
             required
             value={data.dob}
+            years={{ from: -100, to: -18, start: -30 }}
             hint={show('dob') ? undefined : 'You must be 18 or older'}
             error={show('dob')}
             onChange={(dobValue) => update({ dob: dobValue })}

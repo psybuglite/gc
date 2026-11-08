@@ -18,20 +18,24 @@ React + TypeScript + Vite + Tailwind CSS v4 implementation of the guideConnect F
 | `/apply/id` | 4 ID verification | `16086:6280` |
 | `/apply/references` | 5 References | `16086:6534` |
 | `/apply/review` | 6 Review & submit | `16088:6661` |
-| `/apply/submitted` | Placeholder confirmation (real screen not built yet) | `16088:6931` |
+| `/apply/submitted` | Application submitted | `16088:6931` |
+| `/apply/status/review` | Under review | `16088:7056` |
+| `/apply/status/changes` | Changes requested | `16089:6877` |
+| `/apply/status/approved` | Approved | `16089:7381` |
+| `/apply/status/rejected` | Not approved | `16089:7535` |
+| `/apply/status` | Index of the status screens (preview aid) | — |
+
+Resubmit variants (after "Changes requested"): `/apply/id?resubmit=1` (`16089:7027`), `/apply/references?resubmit=1`, `/apply/review?resubmit=1` (`16089:7199`).
 
 Also: `/verify` — standalone "Verify your identity" screen (Figma `16698:20190`).
 
 Form answers persist to `localStorage` ("your progress saves as you go"). Uploaded files stay in memory only until there is an API.
 
-## Not built yet
-Status screens (submitted / under review / changes requested / approved / not approved), picker modals and sheets (country, date, language, ID type…), help & support panels, and the error / "needs changes" variants. Country, language, years and relationship pickers currently use native selects.
+## Overlays
+`src/components/overlays/` — one `Overlay` (centred dialog or side sheet on desktop, bottom sheet on mobile) plus the pickers built on it: country / dial code, date (wheels), list (years, relationship), ID type, languages, and the help + support panels (opened from the top bar).
 
-## Develop
-```bash
-npm install
-npm run dev
-npm run build
-```
+## Keeping in sync with Figma
+The typeface is Poppins and type styles follow the Figma text styles (Display 40/52, Text 14/20, 16/24, 18/26, 12/18). Colours, spacing and radii are tokens in `src/index.css` (`@theme`).
 
-Design tokens live in `src/index.css` (`@theme`). Icons are from [Untitled UI icons](https://github.com/untitleduico/icons).
+## Placeholders to replace
+Review notes, progress counts, the FAQ answers, support links and the "Go to dashboard" target are sample content until there is a backend. The guide dashboard itself isn't built.

@@ -1,7 +1,8 @@
-import { useId } from 'react'
-import { COUNTRIES, flagEmoji, findCountry } from '../data/countries'
+import { useId, useState } from 'react'
+import { flagEmoji, findCountry } from '../data/countries'
 import { ChevronDownIcon } from './icons/ChevronDownIcon'
 import { Field, controlBox, controlShell } from './Field'
+import { CountryPicker } from './overlays/CountryPicker'
 
 type PhoneFieldProps = {
   label?: string
@@ -16,28 +17,17 @@ type PhoneFieldProps = {
 /** UI/Phone Field — country calling code selector, divider, number input. */
 export function PhoneField({ label = 'Phone number', required, countryCode, number, error, onCountryChange, onNumberChange }: PhoneFieldProps) {
   const id = useId()
+  const [open, setOpen] = useState(false)
   const country = findCountry(countryCode)
   return (
     <Field label={label} required={required} htmlFor={id} error={error} className="w-full">
-      <div className={controlShell}>
+      <div className={controlShell(error)}>
         <div className={controlBox(error)}>
-          <label className="relative flex cursor-pointer items-center gap-1.5">
+          <button type="button" aria-haspopup="dialog" aria-label="Country calling code" onClick={() => setOpen(true)} className="flex cursor-pointer items-center gap-1.5">
             <span className="text-xl leading-none">{flagEmoji(country.code)}</span>
             <span className="text-sm font-medium text-text-primary">{country.dial}</span>
             <ChevronDownIcon className="size-4 text-text-primary" />
-            <select
-              aria-label="Country calling code"
-              value={countryCode}
-              onChange={(e) => onCountryChange(e.target.value)}
-              className="absolute inset-0 size-full cursor-pointer opacity-0"
-            >
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {flagEmoji(c.code)} {c.name} ({c.dial})
-                </option>
-              ))}
-            </select>
-          </label>
+          </button>
           <span className="h-6 w-px shrink-0 bg-[#b0b0b0]" aria-hidden="true" />
           <input
             id={id}
@@ -51,6 +41,7 @@ export function PhoneField({ label = 'Phone number', required, countryCode, numb
           />
         </div>
       </div>
+      <CountryPicker open={open} onClose={() => setOpen(false)} value={countryCode} onSelect={onCountryChange} mode="dial" />
     </Field>
   )
 }

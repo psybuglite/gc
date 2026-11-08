@@ -5,17 +5,18 @@ type UploadBoxProps = {
   title: string
   hint?: string
   className?: string
+  tone?: 'default' | 'warning'
   onFileSelected?: (file: File) => void
 }
 
-export function UploadBox({ title, hint = 'JPG, PNG or PDF · max 10 MB', className = 'rounded-lg', onFileSelected }: UploadBoxProps) {
+export function UploadBox({ title, hint = 'JPG, PNG or PDF · max 10 MB', className = 'rounded-lg', tone = 'default', onFileSelected }: UploadBoxProps) {
   const inputRef = useRef<HTMLInputElement>(null)
   return (
     <>
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className={`flex w-full cursor-pointer items-center gap-4 ${className} border-[1.5px] border-dashed border-border-strong bg-bg-surface-muted px-5 py-4`}
+        className={`flex w-full cursor-pointer items-center gap-4 ${className} border-[1.5px] border-dashed ${tone === 'warning' ? 'border-warning-text' : 'border-border-strong'} bg-bg-surface-muted px-5 py-4`}
       >
         <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-bg-surface text-text-primary">
           <UploadCloudIcon className="size-6" />

@@ -1,22 +1,26 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Banner } from '../components/Banner'
 import { Checkbox } from '../components/Checkbox'
 import { ChevronDownIcon } from '../components/icons/ChevronDownIcon'
 import { WizardLayout } from '../layouts/WizardLayout'
 import { useApplication } from '../state/application'
 import { ID_TYPES } from './IdVerification'
 
-type RowProps = { title: string; summary: string; details?: string[]; editTo: string }
+type RowProps = { title: string; summary: string; details?: string[]; editTo: string; updated?: boolean }
 
 /** UI/Review Row — title + summary + Edit link; chevron expands extra detail. */
-function ReviewRow({ title, summary, details = [], editTo }: RowProps) {
+function ReviewRow({ title, summary, details = [], editTo, updated }: RowProps) {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   return (
     <div className="border-b border-border-subtle py-2.5">
       <div className="flex items-center gap-3">
         <button type="button" onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-w-px flex-1 cursor-pointer flex-col items-start gap-0.5 text-left">
-          <span className="text-sm font-semibold text-text-tertiary">{title}</span>
+          <span className="flex items-center gap-2 text-sm font-semibold text-text-tertiary">
+            {title}
+            {updated && <span className="rounded-full bg-success-bg px-2 py-0.5 text-xs leading-[18px] font-semibold text-success-text">Updated</span>}
+          </span>
           <span className="text-base font-medium text-text-primary">{summary}</span>
         </button>
         <button type="button" onClick={() => navigate(editTo)} className="cursor-pointer px-1 py-2 text-sm font-semibold text-text-primary">
@@ -50,9 +54,10 @@ const AGREEMENTS = [
 export default function ReviewSubmit() {
   const navigate = useNavigate()
   const { data, attachments } = useApplication()
+  const resubmit = useSearchParams()[0].get('resubmit') === '1'
   const [agreed, setAgreed] = useState<boolean[]>(AGREEMENTS.map(() => false))
   const [tried, setTried] = useState(false)
-  const all = agreed.every(Boolean)
+  const all = resubmit || agreed.every(Boolean)
   const photos = attachments.photos.filter((p) => p.progress === 100).length
   const idLabel = ID_TYPES.find((t) => t.id === data.idType)?.label ?? 'ID'
 
@@ -61,16 +66,24 @@ export default function ReviewSubmit() {
       step={6}
       quarters={4}
       stepLabel="Review"
-      title="Review and submit"
-      subtitle="Check everything, then submit."
-      backTo="/apply/references"
-      nextLabel="Submit application"
+      title={resubmit ? 'Review and resubmit' : 'Review and submit'}
+      subtitle={resubmit ? undefined : 'Check everything, then submit.'}
+      banner={resubmit && <Banner tone="success" title="Both fixes done">Check your updates, then resubmit. We’ll only re-review what changed.</Banner>}
+      footerLabel={resubmit ? 'Review & resubmit' : undefined}
+      backTo={resubmit ? undefined : '/apply/references'}
+      nextLabel={resubmit ? 'Resubmit application' : 'Submit application'}
       onNext={() => {
         setTried(true)
-        if (all) navigate('/apply/submitted')
+        if (all) navigate(resubmit ? '/apply/status/review' : '/apply/submitted')
       }}
     >
       <div className="flex w-full flex-col">
+        {resubmit && (
+          <>
+            <ReviewRow title="ID" updated summary={`${idLabel} ending ${data.idNumber.trim().slice(-4)} · new photo`} details={[`Issued ${data.idIssue}`, `Expires ${data.idExpiry}`]} editTo="/apply/id?resubmit=1" />
+            <ReviewRow title="References" updated summary={`${data.references.map((r) => r.name).join(', ')} · email fixed`} details={data.references.map((r) => `${r.name} · ${r.relationship} · ${r.email}`)} editTo="/apply/references?resubmit=1" />
+          </>
+        )}
         <ReviewRow
           title="About you"
           summary={`${data.firstName} ${data.lastName} · ${data.city}`.trim()}
@@ -83,21 +96,16 @@ export default function ReviewSubmit() {
           details={[data.experience === 'new' ? 'New to guiding' : `Experience: ${data.years}`, data.tourStory]}
           editTo="/apply/offer"
         />
-        <ReviewRow title="Photos" summary={`${photos} photos added`} editTo="/apply/photos" />
-        <ReviewRow
-          title="ID"
-          summary={`${idLabel} ending ${data.idNumber.trim().slice(-4)}`}
-          details={[`Issued ${data.idIssue}`, `Expires ${data.idExpiry}`]}
-          editTo="/apply/id"
-        />
-        <ReviewRow
-          title="References"
-          summary={data.references.map((r) => r.name).join(', ')}
-          details={data.references.map((r) => `${r.name} · ${r.relationship} · ${r.email}`)}
-          editTo="/apply/references"
-        />
+        {!resubmit && (
+          <>
+            <ReviewRow title="Photos" summary={`${photos} photos added`} editTo="/apply/photos" />
+            <ReviewRow title="ID" summary={`${idLabel} ending ${data.idNumber.trim().slice(-4)}`} details={[`Issued ${data.idIssue}`, `Expires ${data.idExpiry}`]} editTo="/apply/id" />
+            <ReviewRow title="References" summary={data.references.map((r) => r.name).join(', ')} details={data.references.map((r) => `${r.name} · ${r.relationship} · ${r.email}`)} editTo="/apply/references" />
+          </>
+        )}
       </div>
 
+      {!resubmit && (
       <div className="flex w-full flex-col gap-2 rounded-2xl bg-bg-surface-muted px-6 py-4">
         <h2 className="m-0 text-lg leading-[26px] font-semibold text-text-primary">Before you submit</h2>
         {AGREEMENTS.map((text, i) => (
@@ -106,11 +114,12 @@ export default function ReviewSubmit() {
           </Checkbox>
         ))}
         {tried && !all && (
-          <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+          <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
             Please tick every box to submit.
           </p>
         )}
       </div>
+      )}
     </WizardLayout>
   )
 }

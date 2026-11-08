@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Chip } from '../components/Chip'
 import { RemovableChip } from '../components/RemovableChip'
 import { TextField } from '../components/TextField'
-import { LANGUAGES, TOUR_SUGGESTIONS } from '../data/languages'
+import { LanguagePicker } from '../components/overlays/LanguagePicker'
+import { TOUR_SUGGESTIONS } from '../data/languages'
 import { WizardLayout } from '../layouts/WizardLayout'
 import { useApplication } from '../state/application'
 
@@ -17,7 +18,7 @@ export default function WhatYouOffer() {
     word: /^\S+$/.test(data.tourWord.trim()) ? '' : 'Use one word (hyphens are fine)',
     languages: data.languages.length ? '' : 'Add at least one language',
   }
-  const available = LANGUAGES.filter((l) => !data.languages.includes(l))
+  const [langOpen, setLangOpen] = useState(false)
 
   return (
     <WizardLayout
@@ -63,31 +64,22 @@ export default function WhatYouOffer() {
           {data.languages.map((l) => (
             <RemovableChip key={l} label={l} onRemove={() => update({ languages: data.languages.filter((x) => x !== l) })} />
           ))}
-          {available.length > 0 && (
-            <label className="relative flex cursor-pointer items-center rounded-full border border-border-subtle bg-bg-surface px-3 py-1.5 text-sm font-medium text-text-secondary">
-              + Add language
-              <select
-                aria-label="Add language"
-                value=""
-                onChange={(e) => e.target.value && update({ languages: [...data.languages, e.target.value] })}
-                className="absolute inset-0 size-full cursor-pointer opacity-0"
-              >
-                <option value="">Add language</option>
-                {available.map((l) => (
-                  <option key={l} value={l}>
-                    {l}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+          <button
+            type="button"
+            aria-haspopup="dialog"
+            onClick={() => setLangOpen(true)}
+            className="flex cursor-pointer items-center rounded-full border border-border-subtle bg-bg-surface px-3 py-1.5 text-sm font-medium text-text-secondary"
+          >
+            + Add language
+          </button>
         </div>
         {submitted && errors.languages && (
-          <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+          <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
             {errors.languages}
           </p>
         )}
       </section>
+      <LanguagePicker open={langOpen} onClose={() => setLangOpen(false)} value={data.languages} onConfirm={(languages) => update({ languages })} />
     </WizardLayout>
   )
 }

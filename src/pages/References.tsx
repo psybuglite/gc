@@ -1,5 +1,8 @@
 import { useId, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { ListPicker } from '../components/overlays/ListPicker'
+import { RELATIONSHIPS } from '../data/languages'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Banner } from '../components/Banner'
 import { Field, controlBox, controlShell } from '../components/Field'
 import { ChevronDownIcon } from '../components/icons/ChevronDownIcon'
 import { MailIcon } from '../components/icons/MiscIcons'
@@ -7,29 +10,20 @@ import { TextField } from '../components/TextField'
 import { WizardLayout } from '../layouts/WizardLayout'
 import { useApplication, type Reference } from '../state/application'
 
-const RELATIONSHIPS = ['Colleague', 'Friend', 'Former employer', 'Mentor', 'Neighbour', 'Past guest or client', 'Community leader']
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 function RelationshipSelect({ value, error, onChange }: { value: string; error?: string; onChange: (v: string) => void }) {
   const id = useId()
+  const [open, setOpen] = useState(false)
   return (
     <Field label="Relationship" required htmlFor={id} error={error} className="md:min-w-px md:flex-1">
-      <div className={`relative ${controlShell}`}>
-        <div className={controlBox(error)}>
+      <div className={controlShell()}>
+        <button id={id} type="button" aria-haspopup="dialog" onClick={() => setOpen(true)} className={`${controlBox(error)} cursor-pointer text-left`}>
           <span className={`min-w-px flex-1 text-sm font-medium ${value ? 'text-text-primary' : 'text-[#3d3d3d] opacity-50'}`}>{value || 'Select relationship'}</span>
           <ChevronDownIcon className="size-6 text-text-primary opacity-80" />
-        </div>
-        <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className="absolute inset-0 size-full cursor-pointer opacity-0">
-          <option value="" disabled>
-            Select relationship
-          </option>
-          {RELATIONSHIPS.map((r) => (
-            <option key={r} value={r}>
-              {r}
-            </option>
-          ))}
-        </select>
+        </button>
       </div>
+      <ListPicker open={open} onClose={() => setOpen(false)} title="How do you know them?" options={RELATIONSHIPS} value={value} onSelect={onChange} />
     </Field>
   )
 }
@@ -39,6 +33,7 @@ export default function References() {
   const navigate = useNavigate()
   const { data, update } = useApplication()
   const [submitted, setSubmitted] = useState(false)
+  const resubmit = useSearchParams()[0].get('resubmit') === '1'
 
   const setRef = (i: number, patch: Partial<Reference>) =>
     update({ references: data.references.map((r, idx) => (idx === i ? { ...r, ...patch } : r)) })
@@ -61,10 +56,11 @@ export default function References() {
       stepLabel="References"
       title="Who can vouch for you?"
       subtitle="Two people who’ve seen how you treat guests. Not family."
-      backTo="/apply/id"
+      banner={resubmit && <Banner tone="warning" title="Reference 2’s email bounced">Use a working email address so we can reach them.</Banner>}
+      backTo={resubmit ? undefined : '/apply/id'}
       onNext={() => {
         setSubmitted(true)
-        if (valid) navigate('/apply/review')
+        if (valid) navigate(resubmit ? '/apply/review?resubmit=1' : '/apply/review')
       }}
     >
       {data.references.map((r, i) => (

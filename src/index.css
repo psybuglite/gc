@@ -21,7 +21,15 @@
   --color-border-strong: #d1d1d1;
   --color-info-bg: #f1f7fd;
   --color-info-text: #2f579e;
+  --color-overlay-scrim: rgb(0 0 0 / 0.4);
+  --color-danger-border: #dc2b2b;
+  --color-danger-ring: rgb(249 91 91 / 0.4);
+  --color-error: #ff3a29;
   --color-danger: #ee4545;
+  --color-warning-bg: #fff6e4;
+  --color-warning-text: #922d1a;
+  --color-danger-bg: #ffeff0;
+  --color-danger-text: #cf2929;
   --color-success-bg: #def2e6;
   --color-success-text: #107953;
 

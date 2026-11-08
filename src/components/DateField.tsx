@@ -1,6 +1,7 @@
-import { useId, useRef } from 'react'
+import { useId, useState } from 'react'
 import { CalendarIcon } from './icons/CalendarIcon'
 import { Field, controlBox, controlShell } from './Field'
+import { DatePicker } from './overlays/DatePicker'
 
 type DateFieldProps = {
   label: string
@@ -10,6 +11,8 @@ type DateFieldProps = {
   hint?: string
   error?: string
   className?: string
+  /** Year range offered by the picker, relative to this year (e.g. -100 … -18 for date of birth). */
+  years?: { from: number; to: number; start: number }
   onChange: (value: string) => void
 }
 
@@ -30,12 +33,13 @@ export function parseDate(value: string): Date | null {
 }
 
 /** Date text field with calendar button (opens the browser's date picker). */
-export function DateField({ label, required, value, hint, error, className, onChange }: DateFieldProps) {
+export function DateField({ label, required, value, hint, error, className, years = { from: -100, to: 0, start: -30 }, onChange }: DateFieldProps) {
   const id = useId()
-  const picker = useRef<HTMLInputElement>(null)
+  const [open, setOpen] = useState(false)
+  const now = new Date().getFullYear()
   return (
     <Field label={label} required={required} htmlFor={id} hint={hint} error={error} className={className}>
-      <div className={controlShell}>
+      <div className={controlShell(error)}>
         <div className={controlBox(error)}>
           <input
             id={id}
@@ -46,27 +50,12 @@ export function DateField({ label, required, value, hint, error, className, onCh
             onChange={(e) => onChange(formatDate(e.target.value))}
             className="min-w-px flex-1 bg-transparent text-sm font-medium text-text-primary outline-none placeholder:text-[#3d3d3d]/50"
           />
-          <button
-            type="button"
-            aria-label="Open calendar"
-            onClick={() => picker.current?.showPicker?.()}
-            className="relative flex cursor-pointer text-text-primary opacity-80"
-          >
+          <button type="button" aria-label="Open calendar" aria-haspopup="dialog" onClick={() => setOpen(true)} className="flex cursor-pointer text-text-primary opacity-80">
             <CalendarIcon className="size-6" />
-            <input
-              ref={picker}
-              type="date"
-              tabIndex={-1}
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 size-full opacity-0"
-              onChange={(e) => {
-                const [y, mo, d] = e.target.value.split('-')
-                if (y) onChange(`${d} / ${mo} / ${y}`)
-              }}
-            />
           </button>
         </div>
       </div>
+      <DatePicker open={open} onClose={() => setOpen(false)} title={label} value={value} minYear={now + years.from} maxYear={now + years.to} defaultYear={now + years.start} onConfirm={onChange} />
     </Field>
   )
 }

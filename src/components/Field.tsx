@@ -24,7 +24,7 @@ export function Field({ label, required, htmlFor, error, hint, className = '', c
       </label>
       {children}
       {error ? (
-        <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+        <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
           {error}
         </p>
       ) : (
@@ -35,6 +35,7 @@ export function Field({ label, required, htmlFor, error, hint, className = '', c
 }
 
 /** Shared 54px field shell: 52px visible box inset 1px; wrapper outline is the focus ring. */
-export const controlShell = 'rounded-[9px] p-px focus-within:outline-2 focus-within:outline-brand-border'
+export const controlShell = (error?: string) =>
+  `rounded-[9px] p-px outline-2 ${error ? 'outline-danger-ring' : 'outline-transparent focus-within:outline-brand-border'}`
 export const controlBox = (error?: string) =>
-  `flex h-[52px] w-full items-center gap-3 rounded-[8px] border bg-white px-[15px] ${error ? 'border-danger' : 'border-[#b0b0b0]'}`
+  `flex h-[52px] w-full items-center gap-3 rounded-[8px] border bg-white px-[15px] ${error ? 'border-danger-border' : 'border-[#b0b0b0]'}`

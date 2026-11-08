@@ -53,7 +53,7 @@ export default function TourStory() {
           </Button>
         </div>
         {submitted && tooShort && (
-          <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+          <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
             Write at least a sentence ({MIN}+ characters).
           </p>
         )}

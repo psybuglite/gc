@@ -59,7 +59,7 @@ export default function Photos() {
         </p>
       </div>
       {rejected && (
-        <p role="alert" className="m-0 text-xs leading-[18px] text-danger">
+        <p role="alert" className="m-0 text-xs leading-[18px] font-medium text-error">
           {rejected}
         </p>
       )}

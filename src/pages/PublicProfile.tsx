@@ -16,7 +16,7 @@ export default function PublicProfile() {
   const errors = {
     firstName: data.firstName.trim() ? '' : 'Enter your first name',
     lastName: data.lastName.trim() ? '' : 'Enter your last name',
-    intro: data.intro.trim() ? '' : 'Add a one-line intro',
+    intro: data.intro.trim() ? '' : 'Add a short intro (up to 80 characters)',
   }
   const valid = !errors.firstName && !errors.lastName && !errors.intro
 

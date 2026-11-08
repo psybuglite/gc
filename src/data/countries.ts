@@ -1,7 +1,7 @@
 export type Country = { code: string; name: string; dial: string }
 
 /** Curated list (ISO 3166-1 alpha-2 code, name, calling code). Flags are derived from the code. */
-export const COUNTRIES: Country[] = [
+const RAW: Country[] = [
   { code: 'NG', name: 'Nigeria', dial: '+234' },
   { code: 'GH', name: 'Ghana', dial: '+233' },
   { code: 'KE', name: 'Kenya', dial: '+254' },
@@ -44,6 +44,10 @@ export const COUNTRIES: Country[] = [
   { code: 'AR', name: 'Argentina', dial: '+54' },
   { code: 'JM', name: 'Jamaica', dial: '+1876' },
 ]
+
+const FIRST = ['NG', 'GH', 'KE', 'ZA', 'GB', 'US', 'CA', 'FR']
+const rank = (c: Country) => (FIRST.includes(c.code) ? FIRST.indexOf(c.code) : FIRST.length)
+export const COUNTRIES: Country[] = [...RAW].sort((a, b) => rank(a) - rank(b))
 
 export const flagEmoji = (code: string) =>
   String.fromCodePoint(...[...code.toUpperCase()].map((c) => 0x1f1e6 + c.charCodeAt(0) - 65))
