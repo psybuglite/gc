@@ -13,7 +13,7 @@ type FieldProps = {
 /** Label (with required marker) above a control, with optional hint / error message below. */
 export function Field({ label, required, htmlFor, error, hint, className = '', children }: FieldProps) {
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex w-full flex-col gap-1 ${className}`}>
       <label htmlFor={htmlFor} className="flex gap-1 text-sm leading-[18px] font-medium text-text-primary">
         {label}
         {required && (

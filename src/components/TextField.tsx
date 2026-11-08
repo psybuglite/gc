@@ -16,7 +16,7 @@ export function TextField({ label, required, error, hint, multiline, onChange, c
     error ? 'border-danger' : 'border-[#b0b0b0]'
   }`
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className={`flex w-full flex-col gap-1 ${className}`}>
       <label htmlFor={id} className="flex gap-1 text-sm leading-[18px] font-medium text-text-primary">
         {label}
         {required && <span className="text-danger" aria-hidden="true">*</span>}

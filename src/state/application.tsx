@@ -18,7 +18,18 @@ export type ApplicationData = {
   years: string
   tourStory: string
   hourlyRate: number
+  idType: 'passport' | 'drivers-licence' | 'national-id'
+  idNumber: string
+  idIssue: string
+  idExpiry: string
+  references: Reference[]
 }
+
+export type Reference = { name: string; relationship: string; email: string }
+
+/** Files can't be saved to localStorage, so they live in memory for the session only. */
+export type Photo = { id: string; url: string; name: string; progress: number }
+export type Attachments = { profilePhoto: File | null; photos: Photo[]; idDoc: File | null }
 
 const EMPTY: ApplicationData = {
   firstName: '',
@@ -37,10 +48,20 @@ const EMPTY: ApplicationData = {
   years: '',
   tourStory: '',
   hourlyRate: 25,
+  idType: 'passport',
+  idNumber: '',
+  idIssue: '',
+  idExpiry: '',
+  references: [
+    { name: '', relationship: '', email: '' },
+    { name: '', relationship: '', email: '' },
+  ],
 }
 const STORAGE_KEY = 'gc.guideApplication.v1'
 
 type Ctx = {
+  attachments: Attachments
+  setAttachments: React.Dispatch<React.SetStateAction<Attachments>>
   data: ApplicationData
   update: (patch: Partial<ApplicationData>) => void
   reset: () => void
@@ -60,6 +81,7 @@ function load(): ApplicationData {
 /** "Your progress saves as you go" — persisted to localStorage until a backend exists. */
 export function ApplicationProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<ApplicationData>(load)
+  const [attachments, setAttachments] = useState<Attachments>({ profilePhoto: null, photos: [], idDoc: null })
 
   useEffect(() => {
     try {
@@ -70,6 +92,8 @@ export function ApplicationProvider({ children }: { children: ReactNode }) {
   }, [data])
 
   const value: Ctx = {
+    attachments,
+    setAttachments,
     data,
     update: (patch) => setData((d) => ({ ...d, ...patch })),
     reset: () => setData(EMPTY),
