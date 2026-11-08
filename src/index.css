@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+@import '@fontsource/hanken-grotesk/400.css';
+@import '@fontsource/hanken-grotesk/500.css';
+@import '@fontsource/hanken-grotesk/600.css';
+
+/* Design tokens taken from the guideConnect Figma file (variable fallbacks). */
+@theme {
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-primary: #eb6223;
+  --color-brand-subtle: #fef5ee;
+  --color-brand-border: #ef8348;
+  --color-brand-text: #b73717;
+  --color-text-primary: #212121;
+  --color-text-secondary: #4f4f4f;
+  --color-text-tertiary: #6d6d6d;
+  --color-text-on-brand: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-muted: #f6f6f6;
+  --color-border-subtle: #e7e7e7;
+  --color-border-strong: #d1d1d1;
+  --color-info-bg: #f1f7fd;
+  --color-info-text: #2f579e;
+
+  --radius-lg: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
