@@ -12,7 +12,7 @@ type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & 
 /** Input field: label with required marker, 14px/16px padded box, optional hint and error. */
 export function TextField({ label, required, error, hint, multiline, onChange, className = '', ...rest }: TextFieldProps) {
   const id = useId()
-  const box = `w-full rounded-lg border bg-white px-[15px] py-4 text-sm leading-[18px] font-medium text-[#3d3d3d] placeholder:text-[#3d3d3d]/50 outline-none ${
+  const box = `w-full rounded-[8px] border bg-white px-[15px] py-[16px] text-sm leading-[18px] font-medium text-[#3d3d3d] placeholder:text-[#3d3d3d]/50 outline-none ${
     error ? 'border-danger' : 'border-[#b0b0b0]'
   }`
   return (

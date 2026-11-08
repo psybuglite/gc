@@ -5,9 +5,27 @@ export type ApplicationData = {
   firstName: string
   lastName: string
   intro: string
+  nationality: string
+  dob: string
+  phoneCountry: string
+  phone: string
+  street: string
+  city: string
+  state: string
 }
 
-const EMPTY: ApplicationData = { firstName: '', lastName: '', intro: '' }
+const EMPTY: ApplicationData = {
+  firstName: '',
+  lastName: '',
+  intro: '',
+  nationality: 'NG',
+  dob: '',
+  phoneCountry: 'NG',
+  phone: '',
+  street: '',
+  city: '',
+  state: '',
+}
 const STORAGE_KEY = 'gc.guideApplication.v1'
 
 type Ctx = {
