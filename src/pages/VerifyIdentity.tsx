@@ -71,6 +71,7 @@ export default function VerifyIdentity() {
         </div>
 
         <Button
+          fullWidth
           onClick={() => {
             if (!file) setError('Please upload your ID before continuing.')
           }}

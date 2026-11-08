@@ -21,8 +21,12 @@
   --color-border-strong: #d1d1d1;
   --color-info-bg: #f1f7fd;
   --color-info-text: #2f579e;
+  --color-success-bg: #def2e6;
+  --color-success-text: #107953;
 
   --radius-lg: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 28px;
 }
 
 body {
